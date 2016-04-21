@@ -15,14 +15,19 @@
 
 #include "ef-lib.h"
 
-#define STATE_DIR "/var/lib/easyfind"
-#define STATE_FILE "/var/lib/easyfind/easyfind.conf"
+#define STATE_DIR "/etc/bubba"
+#define STATE_FILE "/etc/bubba/easyfind.conf"
 #define PID_FILE "/var/run/easyfind/efd.pid"
 #define WAN_IF "eth0"
 #define MAX_LINE_LEN 1024
 #define UPDATE_INTERVAL 60
+
+#if defined (NOPRIV) && !defined (USER)
 #define USER "easyfind"
-#define GROUP "easyfind"
+#endif
+#if defined (USER) && !defined (GROUP)
+#define GROUP USER
+#endif
 
 #define WAN_MAC_FILE "/sys/class/net/" WAN_IF "/address"
 
@@ -39,7 +44,11 @@ char enabled[4] = "no";
 
 /* State file opening/creation attempt */
 void check_state_perms() {
+#if defined (USER)
     const char* root_msg = "You should probably run as root (ef) or " USER " (efd)";
+#else
+    const char* root_msg = "You should probably run as root";
+#endif
     if ( access(STATE_FILE, F_OK ) != -1 ) {
         if ( access(STATE_FILE, R_OK) == -1 ) {
             fprintf(stderr, RED "ERROR" RESET ": State file '%s' is not readable: %s\n%s\n", STATE_FILE, strerror(errno), root_msg);
@@ -203,7 +212,9 @@ void read_state(int r) {
     }
 }
 
+#if defined (USER)
 int state_file_ok = 1;
+#endif
 
 /* Write state file */
 char* write_state() {
@@ -213,6 +224,7 @@ char* write_state() {
     } else {
         fprintf(st_file, "enable = %s\nip = %s\nname = %s\n", enabled, last_ip, last_name);
         fclose(st_file);
+#if defined (USER)
         if (state_file_ok == 1) {
             struct passwd *u_pwd = getpwnam(USER);
             if ( u_pwd == NULL ) {
@@ -233,6 +245,7 @@ char* write_state() {
 
             state_file_ok = 0;
         }
+#endif
         return NULL;
     }
 }
@@ -254,6 +267,7 @@ void read_mac() {
 void usage() {
     printf("usage: ef [-d|<name>.<domain>]\n");
 }
+
 
 /* Main non-daemonic function */
 int ef(int argc, char** argv) {
@@ -312,7 +326,7 @@ int ef(int argc, char** argv) {
         regfree(&regex);
         if (r != 0) {
             if (r == REG_NOMATCH) {
-                fprintf(stderr,  RED "ERROR" RESET ": The requested domain %s in not valid\n", argv[1]);
+                fprintf(stderr,  RED "ERROR" RESET ": The requested domain %s is not valid\n", argv[1]);
                 return 1;
             } else {
                 fprintf(stderr,  RED "ERROR" RESET ": There was an error while trying to check domain regex.\n");
@@ -412,6 +426,7 @@ void handle_term(int signum) {
     running = 0;
 }
 
+
 /* Main daemonic function */
 int efd(int argc, char** argv) {
 
@@ -422,7 +437,9 @@ int efd(int argc, char** argv) {
         exit(1);
     }
 
+#if defined (USER)
     state_file_ok = 0;
+#endif
 
     pid_t pid = fork();
     if (pid < 0) {
@@ -513,3 +530,4 @@ int main(int argc, char** argv) {
         return ef(argc, argv);
     }
 }
+
