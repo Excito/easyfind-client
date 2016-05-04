@@ -1,16 +1,16 @@
-CC      = gcc
-CFLAGS  = -c -Wall
-LDFLAGS = -lcurl -ljson-c
+CC      = g++
+CFLAGS  +=  -c -Wall
+LDFLAGS +=  -lcurl -ljson-c
 OBJ     = ef.o ef-lib.o
 DEPS    = ef-lib.h
 
 all: ef
 
 ef: $(OBJ)
-	$(CC) $(LDFLAGS) ef.o ef-lib.o -o ef
+	$(CC) ef.o ef-lib.o $(LDFLAGS) -o ef
 
 %.o: %.c $(DEP)
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $(EXTRAFLAGS) $< -o $@
 
 distclean: clean
 

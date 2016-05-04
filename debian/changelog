@@ -1,3 +1,35 @@
+easyfind-client (0.3) UNRELEASED; urgency=medium
+
+  * Add json entry point for web UI integration
+
+ -- Gordon Bos <gordon@bosvangennip.nl> Thu, 26 Apr 2016 16:09:01 +0200
+
+easyfind-client (0.2.1-2) UNRELEASED; urgency=low
+
+  * Allow runtime override of some fixed paths and file locations
+  * Add command line parameter to ignore easyfind server certificate
+
+ -- Gordon Bos <gordon@bosvangennip.nl> Thu, 25 Apr 2016 12:13:35 +0200
+
+easyfind-client (0.2.1-1) UNRELEASED; urgency=low
+
+  * Make code for running the service unpriviliged optional
+  * Allow compile time override of some fixed paths and file locations
+
+    Bubba web UI expects easyfind.conf to be in /etc/network and using
+    this location will require running as root to recreate the state file.
+
+    This is a source code only change: when building a Debian package the
+    resulting binary will be the same as 0.2.1
+
+ -- Gordon Bos <gordon@bosvangennip.nl> Thu, 21 Apr 2016 12:08:22 +0200
+
+easyfind-client (0.2.1) UNRELEASED; urgency=medium
+
+  * Let easyfind client use original easyfind.conf content as state file
+
+ -- Gordon Bos <gordon@bosvangennip.nl> Thu, 21 Apr 2016 10:08:16 +0200
+
 easyfind-client (0.2) UNRELEASED; urgency=medium
 
   * Added option to read key from flash if not available on cmdline
