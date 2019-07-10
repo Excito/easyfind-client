@@ -1,3 +1,10 @@
+easyfind-client (0.3) UNRELEASED; urgency=medium
+
+  * Buster version
+  * Changed PID file location
+
+ -- Charles Leclerc <leclerc.charles@gmail.com>  Wed, 10 Jul 2019 02:09:01 +0000
+
 easyfind-client (0.2) stretch; urgency=medium
 
   * Added option to read key from flash if not available on cmdline

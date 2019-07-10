@@ -5,7 +5,7 @@ ConditionPathExists=/var/lib/easyfind/state
 
 [Service]
 Type=forking
-PIDFile=/var/run/easyfind/efd.pid
+PIDFile=/run/easyfind/efd.pid
 User=easyfind
 Group=easyfind
 PermissionsStartOnly=true

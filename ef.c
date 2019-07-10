@@ -17,7 +17,7 @@
 
 #define STATE_DIR "/var/lib/easyfind"
 #define STATE_FILE "/var/lib/easyfind/state"
-#define PID_FILE "/var/run/easyfind/efd.pid"
+#define PID_FILE "/run/easyfind/efd.pid"
 #define WAN_IF "eth0"
 #define MAX_LINE_LEN 1024
 #define UPDATE_INTERVAL 60
