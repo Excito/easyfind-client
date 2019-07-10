@@ -1,4 +1,4 @@
-easyfind-client (0.3) UNRELEASED; urgency=medium
+easyfind-client (0.3) buster; urgency=medium
 
   * Buster version
   * Changed PID file location
