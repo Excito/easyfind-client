@@ -2,7 +2,7 @@ Source: easyfind-client
 Section: net
 Priority: standard
 Maintainer: Charles Leclerc <leclerc.charles@gmail.com>
-Build-Depends: debhelper (>= 11), dh-systemd (>= 1.5), libcurl-ssl-dev, libjson-c-dev, pkg-config
+Build-Depends: debhelper (>= 11), libcurl-ssl-dev, libjson-c-dev, pkg-config
 Standards-Version: 3.9.5
 Homepage: http://github.com/Excito/easyfind-client
 Vcs-Git: https://github.com/Excito/easyfind-client.git

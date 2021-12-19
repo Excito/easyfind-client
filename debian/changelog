@@ -1,3 +1,9 @@
+easyfind-client (0.5) bullseye; urgency=medium
+
+  * Released version 0.5 for buster
+
+ -- Charles Leclerc <leclerc.charles@gmail.com>  Sun, 19 Dec 2021 12:32:02 +0000
+
 easyfind-client (0.4) unstable; urgency=medium
 
   * unstable version
